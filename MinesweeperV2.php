@@ -1,44 +1,29 @@
 <?php
+// $time_start = microtime(true);
 
-header("Content-Type:text/html; charset=utf-8");
-
-$mineNumber = 40;
-$row = 10;
-$col = 10;
+$mineNumber = 1200;
+$row = 50;
+$col = 60;
 
 /**
  * 產生亂數
- * 方法一:如下
  * 方法二:shuffle
  */
 
-for($i = 0; $i < $row*$col; $i++) {                         //產生100個
-    $ranNumber = rand(1,$row*$col);                         //產生1~100的亂數
-    for($j = 0; $j < $i; $j++) {                      //檢查重覆
-        if($ranNumber == $mapInArray[$j]){
-            $ranNumber = rand(1,$row*$col);                 //如果重覆，重新產生亂數
-            $j = 0;
-        }
+for($i = 0; $i < $row*$col; $i++) {
+    if($i < $mineNumber) {
+        $mapInArray[$i] = 'M';
     }
-    $mapInArray[$i] = $ranNumber;                     //寫入陣列
+    else{
+        $mapInArray[$i] = '0';
+    }
 }
-// arsort($mapInArray);                //排序
-// foreach($mapInArray as $value){     //把陣列內的亂數讀出
-// echo $value . "<br />";
-// }
+
+shuffle($mapInArray);
 
 /**
  * 地雷標示
  */
-
-for($i = 0; $i < $row*$col; $i++) {
-    if($mapInArray[$i] <= $mineNumber){
-        $mapInArray[$i] = 'M';
-    }
-    else {
-        $mapInArray[$i] = 0;
-    }
-}
 
 $num = 0 ;
 for($i = 0; $i < $row; $i++) {
@@ -47,20 +32,6 @@ for($i = 0; $i < $row; $i++) {
         $num++;
     }
 }
-
-// for($i = 0; $i < $row; $i++) {
-//     for($j = 0; $j < $col; $j++) {
-//         if($map[$i][$j] === 'M') {
-//             echo "Ｍ ";
-//         }
-//         else {
-//             printf("%02d ",$map[$i][$j]) ;
-//         }
-//     }
-//     echo "N<br>";
-// }
-// echo "<br>";
-
 
 /**
  * 判斷周圍
@@ -108,20 +79,6 @@ for($i = 0; $i < $row; $i++) {
     }
 }
 
-// for($i = 0; $i < $row; $i++) {
-//     for($j = 0; $j < $col; $j++) {
-//         if($map[$i][$j] === 'M') {
-//             echo "Ｍ ";
-//         }
-//         else {
-//             printf("%02d ",$map[$i][$j]) ;
-//         }
-//     }
-//     echo "N<br>";
-// }
-// echo "<br>";
-
-
 /**
  * 印出
  */
@@ -134,5 +91,10 @@ for($i = 0; $i < $row; $i++) {
         echo "N";
     }
 }
+
+// $time_end = microtime(true);
+// $time = $time_end - $time_start;
+
+// echo "Did nothing in $time seconds\n";
 
 ?>
