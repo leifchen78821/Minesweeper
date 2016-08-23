@@ -1,7 +1,9 @@
 <?php
 
 header("Content-Type:text/html; charset=utf-8");
-
+// $get = $_GET['map'] ;
+// echo mb_strlen($get);
+// var_dump($get);
 $mapInOneDimensional = str_split($_GET["map"]);
 // print_r($mapInOneDimensional);
 // echo count($mapInOneDimensional);
@@ -20,9 +22,15 @@ else if(count($mapInOneDimensional) < 109) {
 else {
     $checkIllegalCharacter = false ;
     $countIllegalCharacter = 1 ;
+    $showRight = 0;
     foreach($mapInOneDimensional as $checkList) {
-        if($checkList != "0" && $checkList != "1" && $checkList != "2" && $checkList != "3" && $checkList != "4" && $checkList != "5" && $checkList != "6" && $checkList != "7" && $checkList != "8" && $checkList != "M" && $checkList != "N") {
-            echo "不符合，於第 " . $countIllegalCharacter . " 個有不符合規定的字元(0-8及M/N) [ " . $checkList . " ] !!<br>";
+        // if($checkList != "0" && $checkList != "1" && $checkList != "2" && $checkList != "3" && $checkList != "4" && $checkList != "5" && $checkList != "6" && $checkList != "7" && $checkList != "8" && $checkList != "M" && $checkList != "N") {
+        if(!preg_match("/^([0-8M-N]+)$/", $checkList , $result)) {
+            if($showRight == 0) {
+                echo "不符合";
+                $showRight = 1;
+            }
+            echo "，於第 " . $countIllegalCharacter . " 個有不符合規定的字元(0-8及M/N) [ " . $checkList . " ] !!";
             $checkIllegalCharacter = true;
         }
         $countIllegalCharacter++;
@@ -48,8 +56,10 @@ else {
         }
         if($checkNumberM == 40) {
 
-            $checkRowColumNumber = explode("N" , $_GET["map"]);
-            if(count($checkRowColumNumber) != 10) {
+            // $checkRowColumNumber = explode("N" , $_GET["map"]);
+            $checkN = array_count_values($mapInOneDimensional);
+            // echo $checkN['N'];
+            if($checkN['N'] != 9) {
                 echo "不符合，行列規格不符合 10 * 10 (行數不為10)!!";
                 return ;
             }
@@ -96,6 +106,7 @@ else {
             // }
 
             $checkMineArround = false;
+            $showRight = 0;
             for($i = 0 ; $i < 10 ; $i++) {
                 for($j = 0 ; $j < 10 ; $j++) {
                     $mineArround = 0;
@@ -134,7 +145,11 @@ else {
                         }
 
                         if($mapInTwoDimensional[$i][$j] != $mineArround) {
-                            echo "不符合，於[ " . $j . " , " . $i . " ]的周圍地雷判斷錯誤，應為 [ " . $mineArround . " ] !!<br>";
+                            if($showRight == 0) {
+                                echo "不符合";
+                                $showRight = 1 ;
+                            }
+                            echo "，於[ " . $j . " , " . $i . " ]的周圍地雷判斷錯誤，應為 [ " . $mineArround . " ] !!";
                             $checkMineArround = true;
                         }
                     }

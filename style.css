@@ -1,0 +1,36 @@
+#background {
+    width:500px ;
+    height:500px ;
+    margin:auto ;
+    padding:25px 25px ;
+    background-color:#337091 ;
+}
+
+.divM {
+    float:left ;
+    width:45px ;
+    height:45px ;
+    margin:2.5px 2.5px ;
+    background-color:#929CB0 ;
+}
+
+.spanMineDis {
+    font-size:40px ;
+    display:none ;
+}
+.spanMine {
+    font-size:40px ;
+    display:block ;
+}
+
+.btnM {
+    width:100% ;
+    height:100% ;
+    background-color : #78ABC7 ;
+}
+.disappearBtnM {
+    width:100% ;
+    height:100% ;
+    background-color : #78ABC7 ;
+    display:none ;
+}

@@ -94,6 +94,7 @@ for($i = 0; $i < $row; $i++) {
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title>Minesweeper</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script>
         $( function() {
@@ -132,7 +133,7 @@ for($i = 0; $i < $row; $i++) {
             <form id="Form1" method="post" encType="multipart/form-data" runat="server">
                 <div style = "width:100% ;"><span style = "font-size:xx-large;">Minesweeper</sapn><br><br></div>
 
-                <div style = "width:500px ; height:500px ; margin:auto ; padding:25px 25px ; background-color:#337091">
+                <div id = "background">
                     <!--<?php for($i = 0; $i < 10; $i++): ?>-->
                     <!--    <?php for($j = 0; $j < 10; $j++): ?>-->
                     <!--    <div style = "float:left ; width:45px ; height:45px ; margin:2.5px 2.5px ; background-color:#929CB0">-->
@@ -147,9 +148,9 @@ for($i = 0; $i < $row; $i++) {
                     <!--    <input type="button" class="btnM" name="btnMine[]" id="btnMine[]" value="" style="width:100% ; height:100% ; background-color : #78ABC7">-->
                     <!--</div>-->
                     <?php for($i = 0; $i < 100; $i++): ?>
-                    <div class = "divM" name = "<?= $mapInArray[$i] ; ?>" id = "<?= $mapInArray[$i] ; ?>" style = "float:left ; width:45px ; height:45px ; margin:2.5px 2.5px ; background-color:#929CB0 ;">
-                        <span style = "font-size:40px ; display:none"><?= $mapInArray[$i] ; ?></span>
-                        <input type = "button" class = "btnM" name = "<?= "btnMine[" . $i . "]" ?>" id = "<?= "btnMine[" . $i . "]" ?>" style = "width:100% ; height:100% ; background-color : #78ABC7" onclick = "disapear()" disabled>
+                    <div class = "divM" name = "<?= $mapInArray[$i] ; ?>" id = "<?= $mapInArray[$i] ; ?>">
+                        <span class = "spanMineDis"><?= $mapInArray[$i] ; ?>
+                        </span><input type = "button" class = "btnM" name = "<?= "btnMine[" . $i . "]" ?>" id = "<?= "btnMine[" . $i . "]" ?>" onclick = "disapear()" disabled>
                     </div>
                     <?php endfor ?>
 
@@ -161,7 +162,11 @@ for($i = 0; $i < $row; $i++) {
         </div>
         <script>
             function disapear() {
-                button.style.visibility = "hidden";
+                event.srcElement.className = "disappearBtnM" ;
+                event.srcElement.previousSibling.className = "spanMine" ;
+                if(event.srcElement.parentNode.id == "M") {
+                    alert('Booom!!!!!!!');
+                }
                 // $( "#btnMine" ).prop( "disabled", true );
                 // $("forn[id=Form1]").delegate("input[id=btnStart]","click",function(){
                 // });
