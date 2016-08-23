@@ -1,9 +1,9 @@
 <?php
 // $time_start = microtime(true);
 
-$mineNumber = 1200;
-$row = 50;
-$col = 60;
+$mineNumber = 40;
+$row = 10;
+$col = 10;
 
 /**
  * 產生亂數
