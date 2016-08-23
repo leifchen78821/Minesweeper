@@ -108,23 +108,6 @@ for($i = 0; $i < $row; $i++) {
             $("#btnStart").prop("disabled", true);
             $(".btnM").prop("disabled", false);
             });
-
-            // for(var i = 0 ; i < 100 ; i++) {
-            //     $( function() {
-            //         var obj = $('#mineClone').clone().show();
-            //         $('#mineBox').append( obj ) ;
-            //     });
-            // }
-
-            // $("div[class=divM]").delegate("input[class=btnM]","click",function(){
-            //     alert('123');
-            // });
-
-            // function disapear() {
-            //     alert('123');
-            //     $("forn[id=Form1]").delegate("input[id=btnStart]","click",function(){
-            //     });
-            // };
         });
         </script>
     </head>
@@ -134,26 +117,12 @@ for($i = 0; $i < $row; $i++) {
                 <div style = "width:100% ;"><span style = "font-size:xx-large;">Minesweeper</sapn><br><br></div>
 
                 <div id = "background">
-                    <!--<?php for($i = 0; $i < 10; $i++): ?>-->
-                    <!--    <?php for($j = 0; $j < 10; $j++): ?>-->
-                    <!--    <div style = "float:left ; width:45px ; height:45px ; margin:2.5px 2.5px ; background-color:#929CB0">-->
-                    <!--        <input type="button" class="butM" name="btnMine" id="btnMine" value="" style="width:100% ; height:100% ;" onclick="enableAction();">-->
-                    <!--        <div class="divM" name = "divMine[]" id="divMine[]" style="display: none"><?php echo $map[$i][$j] ; ?></div>-->
-                    <!--    </div>-->
-                    <!--    <?php endfor ?>-->
-                    <!--<?php endfor ?>-->
-                    <!--<div id = "mineBox"></div>-->
-
-                    <!--<div id = "mineClone" style = "float:left ; width:45px ; height:45px ; margin:2.5px 2.5px ; background-color:#929CB0 ; display:none">-->
-                    <!--    <input type="button" class="btnM" name="btnMine[]" id="btnMine[]" value="" style="width:100% ; height:100% ; background-color : #78ABC7">-->
-                    <!--</div>-->
                     <?php for($i = 0; $i < 100; $i++): ?>
                     <div class = "divM" name = "<?= $mapInArray[$i] ; ?>" id = "<?= $mapInArray[$i] ; ?>">
                         <span class = "spanMineDis"><?= $mapInArray[$i] ; ?>
                         </span><input type = "button" class = "btnM" name = "<?= "btnMine[" . $i . "]" ?>" id = "<?= "btnMine[" . $i . "]" ?>" onclick = "disapear()" disabled>
                     </div>
                     <?php endfor ?>
-
                 </div>
 
                 <div style = "width:100% ;"><br><input type="button" class="but" name="btnStart" id="btnStart" value="開始" style="width:100px;" /><br></br></div>
@@ -166,6 +135,7 @@ for($i = 0; $i < $row; $i++) {
                 event.srcElement.previousSibling.className = "spanMine" ;
                 if(event.srcElement.parentNode.id == "M") {
                     alert('Booom!!!!!!!');
+                    event.srcElement.previousSibling.className = "spanMineM" ;
                 }
                 // $( "#btnMine" ).prop( "disabled", true );
                 // $("forn[id=Form1]").delegate("input[id=btnStart]","click",function(){
