@@ -2,7 +2,7 @@
 
 header("Content-Type:text/html; charset=utf-8");
 
-$mineNumber = 40;
+$mineNumber = 20;
 $row = 10;
 $col = 10;
 
@@ -98,16 +98,19 @@ for($i = 0; $i < $row; $i++) {
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script>
         $( function() {
+            var intervel;
+
             $('#btnStart').click( function() {
                 alert('Start!!!!!');
                 var num = 0;
-                setInterval(function() {
+                var intervel = setInterval(function() {
                     $("#timeCounting").html(num);
                     num++;
                 },1000);
             $("#btnStart").prop("disabled", true);
             $(".btnM").prop("disabled", false);
             });
+
         });
         </script>
     </head>
@@ -131,11 +134,18 @@ for($i = 0; $i < $row; $i++) {
         </div>
         <script>
             function disapear() {
-                event.srcElement.className = "disappearBtnM" ;
-                event.srcElement.previousSibling.className = "spanMine" ;
+                event.srcElement.className = "disappearBtnM";
+                event.srcElement.previousSibling.className = "spanMine";
+
                 if(event.srcElement.parentNode.id == "M") {
                     alert('Booom!!!!!!!');
-                    event.srcElement.previousSibling.className = "spanMineM" ;
+                    event.srcElement.previousSibling.className = "spanMineM";
+                    $(".btnM").hide();
+                    $(".spanMineDis").show();
+                    window.clearInterval(intervel);
+                }
+                if(event.srcElement.parentNode.id == "0") {
+                    //
                 }
                 // $( "#btnMine" ).prop( "disabled", true );
                 // $("forn[id=Form1]").delegate("input[id=btnStart]","click",function(){
