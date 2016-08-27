@@ -86,7 +86,9 @@ for($i = 0; $i < $row; $i++) {
         $mapInArray[$num] = $map[$i][$j];
         $num++;
         $_SESSION['MineweeperMap_' . $i . '_' . $j] = $map[$i][$j];
+        echo $_SESSION['MineweeperMap_' . $i . '_' . $j] . " ";
     }
+    echo "<br>";
 }
 
 $_SESSION['MineweeperMap'] = $map;

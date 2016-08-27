@@ -97,9 +97,9 @@ session_start();
                                     }
                                 )
                             } else {
-                                numbers.forEach(myFunction)
-                                document.getElementById("spanMine_"+ajaxData[2]+"_"+ajaxData[3]).style.backgroundColor = "#8fbc8f";
-                                $("#spanMine_"+ajaxData[2]+"_"+ajaxData[3]).html(ajaxData[1]);
+
+                                // document.getElementById("spanMine_"+ajaxData[2]+"_"+ajaxData[3]).style.backgroundColor = "#8fbc8f";
+                                // $("#spanMine_"+ajaxData[2]+"_"+ajaxData[3]).html(ajaxData[1]);
                             }
 
                         }

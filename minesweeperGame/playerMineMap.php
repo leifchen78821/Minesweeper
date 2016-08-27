@@ -131,8 +131,9 @@ if($_GET['action'] == 'click') {
     } elseif($_SESSION['MineweeperMap_' . $_GET['i'] . '_' . $_GET['j']] == 0) {
         // $_SESSION['playerMap_' . $_GET['i'] . '_' . $_GET['j']] = $_SESSION['MineweeperMap_' . $_GET['i'] . '_' . $_GET['j']];
 
+        $result = array();
         $answer = findZero($_GET['i'],$_GET['j'],$result);
-
+        array_unshift($result, 'zero');
         echo json_encode($answer);
     } else {
         // $_SESSION['playerMap_' . $_GET['i'] . '_' . $_GET['j']] = $_SESSION['MineweeperMap_' . $_GET['i'] . '_' . $_GET['j']];
