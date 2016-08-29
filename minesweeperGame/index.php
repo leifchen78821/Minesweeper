@@ -74,7 +74,6 @@ session_start();
                     $.get("/_Minesweeper/minesweeperGame/playerMineMap.php?action=click&i=" + i + "&j=" + j,
                         function(data) {
                             var ajaxData = JSON.parse(data);
-
                             if(ajaxData[0] == 'safe') {
                                 $("#spanMine_"+ajaxData[2]+"_"+ajaxData[3]).html(ajaxData[1]);
                             } else if(ajaxData[0] == 'gameOver') {
@@ -85,11 +84,17 @@ session_start();
                                         var k = 0;
                                         for(var i = 0; i < 10; i++) {
                                             for(var j = 0; j < 10; j++) {
-                                                if($("#spanMine_"+String(i)+"_"+String(j)).html() == '0' || $("#spanMine_"+String(i)+"_"+String(j)).html() == '1' || $("#spanMine_"+String(i)+"_"+String(j)).html() == '2' || $("#spanMine_"+String(i)+"_"+String(j)).html() == '3' || $("#spanMine_"+String(i)+"_"+String(j)).html() == '4' || $("#spanMine_"+String(i)+"_"+String(j)).html() == '5' || $("#spanMine_"+String(i)+"_"+String(j)).html() == '6' || $("#spanMine_"+String(i)+"_"+String(j)).html() == '7' || $("#spanMine_"+String(i)+"_"+String(j)).html() == '8') {
+                                                if ($("#spanMine_"+String(i)+"_"+String(j)).html() == '0' || $("#spanMine_"+String(i)+"_"+String(j)).html() == '1' || $("#spanMine_"+String(i)+"_"+String(j)).html() == '2' || $("#spanMine_"+String(i)+"_"+String(j)).html() == '3' || $("#spanMine_"+String(i)+"_"+String(j)).html() == '4' || $("#spanMine_"+String(i)+"_"+String(j)).html() == '5' || $("#spanMine_"+String(i)+"_"+String(j)).html() == '6' || $("#spanMine_"+String(i)+"_"+String(j)).html() == '7' || $("#spanMine_"+String(i)+"_"+String(j)).html() == '8') {
                                                     // alert($("#spanMine_"+String(i)+"_"+String(j)).html());
                                                 } else {
-                                                    document.getElementById("spanMine_"+String(i)+"_"+String(j)).style.backgroundColor = "#4682b4";
-                                                    $("#spanMine_"+String(i)+"_"+String(j)).html(ajaxData[k]);
+                                                    if (ajaxData[k] == '99') {
+                                                        // document.getElementById("spanMine_"+String(i)+"_"+String(j)).style.backgroundColor = "red";
+                                                        $("#spanMine_"+String(i)+"_"+String(j)).html('　');
+                                                        document.getElementById("spanMine_"+String(i)+"_"+String(j)).className = "spanMineM";
+                                                    } else {
+                                                        document.getElementById("spanMine_"+String(i)+"_"+String(j)).style.backgroundColor = "#4682b4";
+                                                        $("#spanMine_"+String(i)+"_"+String(j)).html(ajaxData[k]);
+                                                    }
                                                 }
                                                 k++;
                                             }
@@ -97,9 +102,20 @@ session_start();
                                     }
                                 )
                             } else {
-
-                                // document.getElementById("spanMine_"+ajaxData[2]+"_"+ajaxData[3]).style.backgroundColor = "#8fbc8f";
-                                // $("#spanMine_"+ajaxData[2]+"_"+ajaxData[3]).html(ajaxData[1]);
+                                for (var key in ajaxData) {
+                                    if(ajaxData[key][0] == 'safe') {
+                                        document.getElementById("btnMine_"+ajaxData[key][2]+"_"+ajaxData[key][3]).className = "disappearBtnM";
+                                        $("#spanMine_"+ajaxData[key][2]+"_"+ajaxData[key][3]).html(ajaxData[key][1]);
+                                    }
+                                    if(ajaxData[key][0] == 'zero') {
+                                        document.getElementById("btnMine_"+ajaxData[key][2]+"_"+ajaxData[key][3]).className = "disappearBtnM";
+                                        document.getElementById("spanMine_"+ajaxData[key][2]+"_"+ajaxData[key][3]).style.backgroundColor = "#8fbc8f";
+                                        $("#spanMine_"+ajaxData[key][2]+"_"+ajaxData[key][3]).html("　");
+                                    }
+                                    // alert(key);
+                                    // document.getElementById("spanMine_"+ajaxData[2]+"_"+ajaxData[3]).style.backgroundColor = "#8fbc8f";
+                                    // $("#spanMine_"+ajaxData[2]+"_"+ajaxData[3]).html(ajaxData[1]);
+                                }
                             }
 
                         }

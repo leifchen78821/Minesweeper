@@ -26,9 +26,12 @@
 }
 .spanMineM {
     font-size:40px ;
-    background-color: red;
+    /*background-color: black;*/
     color:white;
     display:block ;
+    background-image: url("mine.png");
+    background-size: 45px 45px;
+    background-repeat: no-repeat;
 }
 
 .btnM {
