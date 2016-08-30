@@ -7,24 +7,44 @@ header("Content-Type:text/html; charset=utf-8");
 // 判斷過 = 66;
 
 if($_GET['action'] == 'gameStart') {
+    // 初始化玩家地圖
     for($i = 0; $i < 10; $i++) {
         for($j = 0; $j < 10; $j++) {
             // $playerMap[$i][$j] = 0 ;
             $_SESSION['playerMap_' . $i . '_' . $j] = 55 ;
         }
     }
-    // $_SESSION['playerMap'] = $playerMap;
-    // echo json_encode($_SESSION['playerMap']);
+    // 初始化玩家探索炸彈數
+    $_SESSION['minePlayerFind'] = 0 ;
+    echo $_SESSION['mineNumber'] ;
 }
 
 if($_GET['action'] == 'flagOn') {
     $_SESSION['playerMap_' . $_GET['i'] . '_' . $_GET['j']] = 77;
-    echo $_SESSION['playerMap_' . $_GET['i'] . '_' . $_GET['j']];
+    $_SESSION['minePlayerFind']++;
+    if($_SESSION['minePlayerFind'] == 10) {
+        $findAllMine = 0;
+        for ($i = 0; $i < 10; $i++) {
+            for ($j = 0; $j < 10; $j++) {
+                if ($_SESSION['playerMap_' . $i . '_' . $j] == 77 && $_SESSION['MineweeperMap_' . $i . '_' . $j] == 99) {
+                    $findAllMine++;
+                }
+            }
+        }
+        if($findAllMine == 10) {
+            echo "YouWin";
+        }
+    }
+    if($_SESSION['minePlayerFind'] > 10) {
+        echo "tooMuchFlag";
+    }
+    // echo $_SESSION['playerMap_' . $_GET['i'] . '_' . $_GET['j']];
 }
 
 if($_GET['action'] == 'flagOff') {
     $_SESSION['playerMap_' . $_GET['i'] . '_' . $_GET['j']] = 55;
-    echo $_SESSION['playerMap_' . $_GET['i'] . '_' . $_GET['j']];
+    $_SESSION['minePlayerFind']--;
+    // echo $_SESSION['playerMap_' . $_GET['i'] . '_' . $_GET['j']];
 }
 
 function findZero($i,$j,$result)

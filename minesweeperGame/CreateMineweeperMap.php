@@ -6,6 +6,8 @@ $mineNumber = 10;
 $row = 10;
 $col = 10;
 
+$_SESSION['mineNumber'] = $mineNumber;
+
 /**
  * 產生亂數
  * 方法二:shuffle
